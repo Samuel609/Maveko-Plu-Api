@@ -1,0 +1,2 @@
+class SupplierItemPricing < ApplicationRecord
+end

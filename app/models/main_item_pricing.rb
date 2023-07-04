@@ -1,0 +1,2 @@
+class MainItemPricing < ApplicationRecord
+end
