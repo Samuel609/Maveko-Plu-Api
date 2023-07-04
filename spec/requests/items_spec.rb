@@ -49,7 +49,7 @@ RSpec.describe "Items", type: :request do
       get item_url(item), as: :json
       expect(response).to be_successful
       result = JSON(response.body)
-      expect(result['id']).to eq book.id
+      expect(result['data']['id']).to eq item.id
     end
   end
 
