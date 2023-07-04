@@ -1,16 +1,16 @@
 class CurrenciesController < ApplicationController
     def index
-        @currencies = Currencies.all 
+        @currencies = Currency.all 
         render json: {data: @currency, success: true, status: 200}
     end
 
     def show
-        @currency = Currencies.find(params[:id])
+        @currency = Currency.find(params[:id])
         render json: {data: @currency, success: true, status: 200}
     end
 
     def create
-        @currency = Currencies.new(currency_params)
+        @currency = Currency.new(currency_params)
         if @currency.save
             render json: {data: @currency, success: true, status: 200}
         else
@@ -19,7 +19,7 @@ class CurrenciesController < ApplicationController
     end
 
     def update
-        @currency = Currencies.find(params[:id])
+        @currency = Currency.find(params[:id])
         if @currency.update(currency_params)
             render json: {data: @currency, success: true, status: 200}
         else
@@ -28,7 +28,7 @@ class CurrenciesController < ApplicationController
     end
 
     def destroy
-        @currency = Currencies.find(params[:id])
+        @currency = Currency.find(params[:id])
         if @currency.destroy()
             render json: {data: currency, success: true, status: 200}
         else

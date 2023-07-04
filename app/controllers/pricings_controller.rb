@@ -1,16 +1,16 @@
 class PricingsController < ApplicationController
     def index
-        @pricings = Pricings.all 
+        @pricings = Pricing.all 
         render json: {data: @pricing, success: true, status: 200}
     end
 
     def show
-        @pricing = Pricings.find(params[:id])
+        @pricing = Pricing.find(params[:id])
         render json: {data: @pricing, success: true, status: 200}
     end
 
     def create
-        @pricing = Pricings.new(pricing_params)
+        @pricing = Pricing.new(pricing_params)
         if @pricing.save
             render json: {data: @pricing, success: true, status: 200}
         else
@@ -19,7 +19,7 @@ class PricingsController < ApplicationController
     end
 
     def update
-        @pricing = Pricings.find(params[:id])
+        @pricing = Pricing.find(params[:id])
         if @pricing.update(pricing_params)
             render json: {data: @pricing, success: true, status: 200}
         else
@@ -28,7 +28,7 @@ class PricingsController < ApplicationController
     end
 
     def destroy
-        @pricing = Pricings.find(params[:id])
+        @pricing = Pricing.find(params[:id])
         if @pricing.destroy()
             render json: {data: pricing, success: true, status: 200}
         else
