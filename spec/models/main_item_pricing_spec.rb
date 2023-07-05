@@ -1,5 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe MainItemPricing, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it 'has a valid factory' do
+    expect(build(:main_item_pricing)).to be_valid
+  end
+
+  it { belong_to(:item_id).class_name('Item')}
+  it{ belong_to(:pricing_id).class_name('Pricing')}
 end
