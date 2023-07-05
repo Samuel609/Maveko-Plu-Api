@@ -1,38 +1,38 @@
 class PricingsController < ApplicationController
     def index
         @pricings = Pricing.all 
-        render json: {data: @pricing, success: true, status: 200}
+        render json: {data: @pricings, success: true, status: 200}, status: :ok
     end
 
     def show
         @pricing = Pricing.find(params[:id])
-        render json: {data: @pricing, success: true, status: 200}
+        render json: {data: @pricing, success: true, status: 200}, status: :ok
     end
 
     def create
         @pricing = Pricing.new(pricing_params)
         if @pricing.save
-            render json: {data: @pricing, success: true, status: 200}
+            render json: {data: @pricing, success: true, status: 200}, status: :created
         else
-            render json: {data: @pricing.errors, success: false, status: 400}
+            render json: {data: @pricing.errors, success: false, status: 400}, status: :unprocessable_entity
         end
     end
 
     def update
         @pricing = Pricing.find(params[:id])
         if @pricing.update(pricing_params)
-            render json: {data: @pricing, success: true, status: 200}
+            render json: {data: @pricing, success: true, status: 200}, status: :ok
         else
-            render json: {data: @pricing.errors, success: false, status: 400}
+            render json: {data: @pricing.errors, success: false, status: 400}, status: :unprocessable_entity
         end
     end
 
     def destroy
         @pricing = Pricing.find(params[:id])
         if @pricing.destroy()
-            render json: {data: pricing, success: true, status: 200}
+            render json: {data: pricing, success: true, status: 200}, status: :ok
         else
-            render json: {data: pricing.errors, success: false, status: 400}
+            render json: {data: pricing.errors, success: false, status: 400}, status: :unprocessable_entity
         end
     end
 
