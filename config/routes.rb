@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :pricings
   resources :unit_of_measures
   resources :items
+  resources :customers
+  resources :suppliers
   # Defines the root path route ("/")
   # root "articles#index"
 end
