@@ -1,29 +1,29 @@
-class CustomerController < ApplicationController
+class CustomersController < ApplicationController
     def index
         @customers = Customer.all
-        render jsom: {data: @customers, success: true, status: 200}
+        render json: {data: @customers, success: true, status: 200}, status: :ok
     end
 
     def show
         @customer = Customer.find(params[:id])
-        render jsom: {data: @customer, success: true, status: 200}
+        render json: {data: @customer, success: true, status: 200}, status: :ok
     end
 
     def create
         @customer = Customer.new(customer_params)
         if @customer.save
-            render json: {data: @customer, success: true, status: 200}
+            render json: {data: @customer, success: true, status: 200}, status: :created
         else
-            render json: {data: @customer.errors, success: false, status: 200}
+            render json: {data: @customer.errors, success: false, status: 200}, status: :unprocessable_entity
         end
     end
 
     def update
         @customer = Customer.find(params[:id])
         if @customer.update(customer_params)
-            render json: {data: @customer, success: true, status: 200}
+            render json: {data: @customer, success: true, status: 200}, status: :ok
         else
-            render json: {data: @customer.errors, success: false, status: 200}
+            render json: {data: @customer.errors, success: false, status: 200}, status: :unprocessable_entity
         end
     end
 

@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Supplier, type: :model do
-  it 'is valid with valid attributes' do
-    it { should validate_presence_of(:name) }
+  it 'has a valid factory' do
+    expect(build(:supplier)).to be_valid
   end
+
+  it { should validate_presence_of(:name) }
 end
