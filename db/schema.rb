@@ -10,13 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_04_130039) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_04_181953) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "aas", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "abs", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "currencies", force: :cascade do |t|
     t.string "name"
     t.string "symbol"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "customer_item_pricings", force: :cascade do |t|
+    t.bigint "item_id", null: false
+    t.bigint "customer_id", null: false
+    t.bigint "pricing_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_customer_item_pricings_on_customer_id"
+    t.index ["item_id"], name: "index_customer_item_pricings_on_item_id"
+    t.index ["pricing_id"], name: "index_customer_item_pricings_on_pricing_id"
+  end
+
+  create_table "customers", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -39,6 +66,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_04_130039) do
     t.index ["target_unit_id"], name: "index_items_on_target_unit_id"
   end
 
+  create_table "main_item_pricings", force: :cascade do |t|
+    t.bigint "item_id", null: false
+    t.bigint "pricing_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_main_item_pricings_on_item_id"
+    t.index ["pricing_id"], name: "index_main_item_pricings_on_pricing_id"
+  end
+
   create_table "pricings", force: :cascade do |t|
     t.integer "price_in_euro"
     t.integer "old_purchase_price"
@@ -57,6 +93,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_04_130039) do
     t.index ["currency_id"], name: "index_pricings_on_currency_id"
   end
 
+  create_table "supplier_item_pricings", force: :cascade do |t|
+    t.string "status"
+    t.bigint "item_id", null: false
+    t.bigint "supplier_id", null: false
+    t.bigint "pricing_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_supplier_item_pricings_on_item_id"
+    t.index ["pricing_id"], name: "index_supplier_item_pricings_on_pricing_id"
+    t.index ["supplier_id"], name: "index_supplier_item_pricings_on_supplier_id"
+  end
+
+  create_table "suppliers", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "unit_of_measures", force: :cascade do |t|
     t.string "name"
     t.string "unit"
@@ -64,7 +118,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_04_130039) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "customer_item_pricings", "customers"
+  add_foreign_key "customer_item_pricings", "items"
+  add_foreign_key "customer_item_pricings", "pricings"
   add_foreign_key "items", "unit_of_measures", column: "base_unit_id"
   add_foreign_key "items", "unit_of_measures", column: "target_unit_id"
+  add_foreign_key "main_item_pricings", "items"
+  add_foreign_key "main_item_pricings", "pricings"
   add_foreign_key "pricings", "currencies"
+  add_foreign_key "supplier_item_pricings", "items"
+  add_foreign_key "supplier_item_pricings", "pricings"
+  add_foreign_key "supplier_item_pricings", "suppliers"
 end
