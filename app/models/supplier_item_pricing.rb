@@ -1,12 +1,12 @@
 class SupplierItemPricing < ApplicationRecord
-    validates :status
+    validates :status, presence: true
 
-    belong_to :item_id, class_name: 'Item'
-    validates :item_id, presence: true
+    belongs_to :item, class_name: 'Item'
+    validates :item, presence: true
 
-    belong_to :supplier_id, class_name: 'Supplier'
-    validates :supplier_id, presence: true
+    belongs_to :supplier, class_name: 'Supplier'
+    validates :supplier, presence: true
 
-    belong_to :pricing_id, class_name: 'Pricing'
-    validates :pricing_id, presence: true
+    belongs_to :pricing, class_name: 'Pricing'
+    validates :pricing, presence: true
 end
