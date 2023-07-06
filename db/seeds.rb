@@ -97,6 +97,20 @@ Pricing.create(
   change_in_percentage: 15,
 #   currency: Currency.find_by(name: "US Dollar")
 )
+Pricing.create(
+  price_in_euro: 20,
+  old_purchase_price: 15,
+  valid_from_old_purchase: Date.today - 30,
+  new_purchase_price: 18,
+  valid_from_new_purchase: Date.today,
+  valid_to_new_purchase: Date.today + 365,
+  old_retail_price: 30,
+  new_retail_price: 25,
+  new_retail_price_valid_from: Date.today,
+  new_retail_price_valid_to: Date.today + 365,
+  change_in_percentage: 15,
+  #currency: Currency.find_by(name: "US Dollar")
+  )
 
 # Customer Item Pricings
 CustomerItemPricing.create(
@@ -107,12 +121,12 @@ CustomerItemPricing.create(
 CustomerItemPricing.create(
   item:Item.first,
   customer: Customer.second,
-  pricing: Pricing.first
+  pricing: Pricing.second
 )
 CustomerItemPricing.create(
   item: Item.second,
   customer: Customer.third,
-  pricing: Pricing.second
+  pricing: Pricing.third
 )
 
 # Supplier Item Pricings
@@ -132,7 +146,7 @@ SupplierItemPricing.create(
   status: "Active",
   item: Item.third,
   supplier: Supplier.third,
-  pricing: Pricing.first
+  pricing: Pricing.third
 )
 
 # Main Item Pricings
@@ -146,5 +160,5 @@ MainItemPricing.create(
 )
 MainItemPricing.create(
   item: Item.third,
-  pricing: Pricing.first
+  pricing: Pricing.third
 )
