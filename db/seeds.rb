@@ -110,23 +110,6 @@ Pricing.create(
   new_retail_price_valid_to: Date.today + 365,
   change_in_percentage: 15,
   #currency: Currency.find_by(name: "US Dollar")
-  )
-
-# Customer Item Pricings
-CustomerItemPricing.create(
-  item: Item.first,
-  customer: Customer.first,
-  pricing: Pricing.first
-)
-CustomerItemPricing.create(
-  item:Item.first,
-  customer: Customer.second,
-  pricing: Pricing.second
-)
-CustomerItemPricing.create(
-  item: Item.second,
-  customer: Customer.third,
-  pricing: Pricing.third
 )
 
 # Supplier Item Pricings
@@ -136,29 +119,16 @@ SupplierItemPricing.create(
   supplier: Supplier.first,
   pricing: Pricing.first
 )
-SupplierItemPricing.create(
-  status: "Inactive",
-  item: Item.second,
-  supplier: Supplier.second,
-  pricing: Pricing.second
-)
-SupplierItemPricing.create(
-  status: "Active",
-  item: Item.third,
-  supplier: Supplier.third,
-  pricing: Pricing.third
-)
 
 # Main Item Pricings
 MainItemPricing.create(
   item: Item.first,
-  pricing: Pricing.first
-)
-MainItemPricing.create(
-  item: Item.second,
   pricing: Pricing.second
 )
-MainItemPricing.create(
-  item: Item.third,
+
+# Customer Item Pricings
+CustomerItemPricing.create(
+  item: Item.first,
+  customer: Customer.first,
   pricing: Pricing.third
 )
