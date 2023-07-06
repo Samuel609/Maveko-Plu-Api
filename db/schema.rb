@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_04_181953) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_06_130749) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -65,6 +65,34 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_04_181953) do
     t.index ["pricing_id"], name: "index_main_item_pricings_on_pricing_id"
   end
 
+  create_table "notificaitons", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "body", null: false
+    t.string "sender", null: false
+    t.string "status", null: false
+    t.date "delivery_date", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "notification_recipient_copies", force: :cascade do |t|
+    t.bigint "recipient_id"
+    t.bigint "email_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email_id"], name: "index_notification_recipient_copies_on_email_id"
+    t.index ["recipient_id"], name: "index_notification_recipient_copies_on_recipient_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.text "title"
+    t.text "text"
+    t.string "on_click_url"
+    t.datetime "sent_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "pricings", force: :cascade do |t|
     t.integer "price_in_euro"
     t.integer "old_purchase_price"
@@ -104,6 +132,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_04_181953) do
   create_table "unit_of_measures", force: :cascade do |t|
     t.string "name"
     t.string "unit"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
