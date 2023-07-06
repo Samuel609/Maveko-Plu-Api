@@ -14,16 +14,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_06_135529) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "aas", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "abs", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "currencies", force: :cascade do |t|
     t.string "name"
     t.string "symbol"
@@ -118,25 +108,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_06_135529) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "user", force: :cascade do |t|
-    t.string "email"
-    t.string "password_digest"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "users_auth", force: :cascade do |t|
-    t.string "name"
-    t.string "username"
-    t.string "email"
-    t.string "password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
