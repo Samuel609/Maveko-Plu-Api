@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   resources :suppliers
   resources :users, param: :_username
   resources :notifications
+  resources :customer_item_pricings
+  resources :main_item_pricings
+  resources :supplier_item_pricings
   post '/auth/login', to: 'authentication#login'
   get '/*a', to: 'application#not_found'
   # Defines the root path route ("/")

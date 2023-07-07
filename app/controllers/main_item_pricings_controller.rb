@@ -1,7 +1,7 @@
 class MainItemPricingsController < ApplicationController
   def index
     @main_item_pricings = MainItemPricing.all
-    render json: {data: @main_item_pricings, status: 200, Success: true}, status: :ok
+    render json: {data: ActiveModelSerializers::SerializableResource.new(@main_item_pricings, each_serializer: MainItemPricingSerializer), status: 200, Success: true}, status: :ok
   end
 
   def filter
