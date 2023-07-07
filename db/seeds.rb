@@ -7,16 +7,31 @@
 #   Character.create(name: "Luke", movie: movies.first)
 # seeds.rb
 
+#......user
+User.create(
+  email: "user1@gmail.com",
+  password: "user123",
+  password_confirmation: "user123"
+)
+User.create(
+  email: "user2@gmail.com",
+  password: "user123",
+  password_confirmation: "user123"
+)
+User.create(
+  email: "user3@gmail.com",
+  password: "user123",
+  password_confirmation: "user123"
+)
 # Currencies
 Currency.create(name: "US Dollar", symbol: "$")
 Currency.create(name: "Euro", symbol: "€")
 Currency.create(name: "British Pound", symbol: "£")
 
 # Customers
-Customer.create(name: "John Doe")
-Customer.create(name: "Jane Smith")
-Customer.create(name: "Michael Johnson")
-
+Customer.create(name: "John Doe", user_id: User.first.id)
+Customer.create(name: "Jane Smith", user_id: User.second.id)
+Customer.create(name: "Michael Johnson", user_id: User.third.id)
 # Unit of Measures
 UnitOfMeasure.create(name: "Piece", unit: "pc")
 UnitOfMeasure.create(name: "Kilogram", unit: "kg")
