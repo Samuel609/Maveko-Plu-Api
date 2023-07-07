@@ -8,8 +8,11 @@ class NotificationsController < ApplicationController
         end
     end
 
-    def fetch
-        
+    # fetch notifications with date today or less than today not after today
+    def show
+        @notifications = Notification.where(user_id: params[:id], status: Notification::UNREAD).where("delivery_date <= ?", Date.today)
+        render json: {data: @notifications, success: true}, status: :ok
+    end
 
     private
 

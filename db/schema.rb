@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_06_130749) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_07_015104) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -67,7 +67,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_06_130749) do
     t.index ["pricing_id"], name: "index_main_item_pricings_on_pricing_id"
   end
 
-  create_table "notificaitons", force: :cascade do |t|
+  create_table "notifications", force: :cascade do |t|
     t.string "title", null: false
     t.text "body", null: false
     t.string "sender", null: false
@@ -75,24 +75,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_06_130749) do
     t.date "delivery_date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "notification_recipient_copies", force: :cascade do |t|
-    t.bigint "recipient_id"
-    t.bigint "email_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["email_id"], name: "index_notification_recipient_copies_on_email_id"
-    t.index ["recipient_id"], name: "index_notification_recipient_copies_on_recipient_id"
-  end
-
-  create_table "notifications", force: :cascade do |t|
-    t.text "title"
-    t.text "text"
-    t.string "on_click_url"
-    t.datetime "sent_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "pricings", force: :cascade do |t|
@@ -154,6 +138,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_06_130749) do
   add_foreign_key "items", "unit_of_measures", column: "target_unit_id"
   add_foreign_key "main_item_pricings", "items"
   add_foreign_key "main_item_pricings", "pricings"
+  add_foreign_key "notifications", "users"
   add_foreign_key "pricings", "currencies"
   add_foreign_key "supplier_item_pricings", "items"
   add_foreign_key "supplier_item_pricings", "pricings"
