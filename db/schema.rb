@@ -36,8 +36,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_07_015104) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
-    t.index ["user_id"], name: "index_customers_on_user_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -133,7 +131,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_07_015104) do
   add_foreign_key "customer_item_pricings", "customers"
   add_foreign_key "customer_item_pricings", "items"
   add_foreign_key "customer_item_pricings", "pricings"
-  add_foreign_key "customers", "users"
   add_foreign_key "items", "unit_of_measures", column: "base_unit_id"
   add_foreign_key "items", "unit_of_measures", column: "target_unit_id"
   add_foreign_key "main_item_pricings", "items"
