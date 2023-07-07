@@ -6,7 +6,7 @@ class PricingsController < ApplicationController
         updateApproval(1, 1)
         render json: {data: @pricings, success: true, status: 200}, status: :ok
     end
-
+    
     def show
         @pricing = Pricing.find(params[:id])
         render json: {data: @pricing, success: true, status: 200}, status: :ok
