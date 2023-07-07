@@ -64,7 +64,6 @@ class PricingsController < ApplicationController
         #on a global variable
         #so that main and customer item pricing can get them
         @priceSaved = updated_price
-        puts @priceSaved
     end
     #approval function
     def updateApproval(mainItemPriceID, customerItemPriceID)
