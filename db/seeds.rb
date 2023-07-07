@@ -77,7 +77,7 @@ Pricing.create(
   valid_from_new_purchase: Date.today,
   valid_to_new_purchase: Date.today + 365,
   old_retail_price: 15,
-  new_retail_price: 13,
+  new_retail_price: 20,
   new_retail_price_valid_from: Date.today,
   new_retail_price_valid_to: Date.today + 365,
   change_in_percentage: 10,
