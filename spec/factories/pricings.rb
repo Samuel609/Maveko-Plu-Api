@@ -11,5 +11,6 @@ FactoryBot.define do
     new_retail_price_valid_from { Faker::Date.forward(days: 13) }
     new_retail_price_valid_to { Faker::Date.forward(days: 6) }
     change_in_percentage {10}
+    currency_id { create(:currency).id }
   end
 end
