@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_15_113016) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_15_135729) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,6 +19,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_15_113016) do
     t.string "symbol"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "customer_formulas", force: :cascade do |t|
+    t.boolean "active"
+    t.float "margin"
+    t.bigint "customer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_customer_formulas_on_customer_id"
   end
 
   create_table "customer_item_pricings", force: :cascade do |t|
@@ -148,6 +157,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_15_113016) do
     t.string "role", default: "user", null: false
   end
 
+  add_foreign_key "customer_formulas", "customers"
   add_foreign_key "customer_item_pricings", "customers"
   add_foreign_key "customer_item_pricings", "pricings"
   add_foreign_key "customers", "users"
