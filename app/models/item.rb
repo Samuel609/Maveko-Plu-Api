@@ -7,7 +7,6 @@ class Item < ApplicationRecord
   belongs_to :target_unit, class_name: 'UnitOfMeasure'
   validates :target_unit_id, presence: true
 
-  belongs_to :supplier_item_pricing
   belongs_to :main_item_pricing
   belongs_to :customer_item_pricing
   
