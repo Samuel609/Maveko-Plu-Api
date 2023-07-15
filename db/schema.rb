@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_15_094117) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_15_104748) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cross_references", force: :cascade do |t|
+    t.string "supplier_code", null: false
+    t.string "main_code", null: false
+    t.string "customer_code", null: false
+    t.string "status", default: "pending", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "currencies", force: :cascade do |t|
     t.string "name"
@@ -36,6 +45,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_15_094117) do
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_customers_on_user_id"
+  end
+
+  create_table "dimensions", force: :cascade do |t|
+    t.integer "length"
+    t.integer "width"
+    t.integer "height"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "items", force: :cascade do |t|
