@@ -10,18 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_15_104748) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_15_115646) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "cross_references", force: :cascade do |t|
-    t.string "supplier_code", null: false
-    t.string "main_code", null: false
-    t.string "customer_code", null: false
-    t.string "status", default: "pending", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "currencies", force: :cascade do |t|
     t.string "name"
@@ -69,13 +60,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_15_104748) do
     t.datetime "updated_at", null: false
     t.bigint "base_unit_id"
     t.bigint "target_unit_id"
-    t.bigint "supplier_item_pricing_id", null: false
     t.bigint "main_item_pricing_id", null: false
     t.bigint "customer_item_pricing_id", null: false
     t.index ["base_unit_id"], name: "index_items_on_base_unit_id"
     t.index ["customer_item_pricing_id"], name: "index_items_on_customer_item_pricing_id"
     t.index ["main_item_pricing_id"], name: "index_items_on_main_item_pricing_id"
-    t.index ["supplier_item_pricing_id"], name: "index_items_on_supplier_item_pricing_id"
     t.index ["target_unit_id"], name: "index_items_on_target_unit_id"
   end
 
@@ -122,6 +111,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_15_104748) do
     t.bigint "pricing_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "item_id", null: false
+    t.index ["item_id"], name: "index_supplier_item_pricings_on_item_id"
     t.index ["pricing_id"], name: "index_supplier_item_pricings_on_pricing_id"
     t.index ["supplier_id"], name: "index_supplier_item_pricings_on_supplier_id"
   end
@@ -152,12 +143,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_15_104748) do
   add_foreign_key "customers", "users"
   add_foreign_key "items", "customer_item_pricings"
   add_foreign_key "items", "main_item_pricings"
-  add_foreign_key "items", "supplier_item_pricings"
   add_foreign_key "items", "unit_of_measures", column: "base_unit_id"
   add_foreign_key "items", "unit_of_measures", column: "target_unit_id"
   add_foreign_key "main_item_pricings", "pricings"
   add_foreign_key "notifications", "users"
   add_foreign_key "pricings", "currencies"
+  add_foreign_key "supplier_item_pricings", "items"
   add_foreign_key "supplier_item_pricings", "pricings"
   add_foreign_key "supplier_item_pricings", "suppliers"
 end
