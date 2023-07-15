@@ -14,7 +14,10 @@ RSpec.describe "Items", type: :request do
       tax_class: Faker::Lorem.word,
       weight: Faker::Lorem.word,
       base_unit_id: create(:unit_of_measure).id,
-      target_unit_id: create(:unit_of_measure).id
+      target_unit_id: create(:unit_of_measure).id,
+      supplier_item_pricing_id: create(:supplier_item_pricing).id,
+      main_item_pricing_id: create(:main_item_pricing).id,
+      customer_item_pricing_id: create(:customer_item_pricing).id
     }
   end
 
@@ -30,7 +33,10 @@ RSpec.describe "Items", type: :request do
       tax_class: Faker::Lorem.word,
       weight: Faker::Lorem.word,
       base_unit_id: create(:unit_of_measure).id,
-      target_unit_id: create(:unit_of_measure).id
+      target_unit_id: create(:unit_of_measure).id,
+      supplier_item_pricing_id: create(:supplier_item_pricing).id,
+      main_item_pricing_id: create(:main_item_pricing).id,
+      customer_item_pricing_id: create(:customer_item_pricing).id
     }
   end
 

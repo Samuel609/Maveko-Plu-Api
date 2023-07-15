@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_07_015104) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_15_094117) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,13 +22,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_07_015104) do
   end
 
   create_table "customer_item_pricings", force: :cascade do |t|
-    t.bigint "item_id", null: false
     t.bigint "customer_id", null: false
     t.bigint "pricing_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["customer_id"], name: "index_customer_item_pricings_on_customer_id"
-    t.index ["item_id"], name: "index_customer_item_pricings_on_item_id"
     t.index ["pricing_id"], name: "index_customer_item_pricings_on_pricing_id"
   end
 
@@ -54,16 +52,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_07_015104) do
     t.datetime "updated_at", null: false
     t.bigint "base_unit_id"
     t.bigint "target_unit_id"
+    t.bigint "supplier_item_pricing_id", null: false
+    t.bigint "main_item_pricing_id", null: false
+    t.bigint "customer_item_pricing_id", null: false
     t.index ["base_unit_id"], name: "index_items_on_base_unit_id"
+    t.index ["customer_item_pricing_id"], name: "index_items_on_customer_item_pricing_id"
+    t.index ["main_item_pricing_id"], name: "index_items_on_main_item_pricing_id"
+    t.index ["supplier_item_pricing_id"], name: "index_items_on_supplier_item_pricing_id"
     t.index ["target_unit_id"], name: "index_items_on_target_unit_id"
   end
 
   create_table "main_item_pricings", force: :cascade do |t|
-    t.bigint "item_id", null: false
     t.bigint "pricing_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["item_id"], name: "index_main_item_pricings_on_item_id"
     t.index ["pricing_id"], name: "index_main_item_pricings_on_pricing_id"
   end
 
@@ -99,12 +101,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_07_015104) do
 
   create_table "supplier_item_pricings", force: :cascade do |t|
     t.string "status"
-    t.bigint "item_id", null: false
     t.bigint "supplier_id", null: false
     t.bigint "pricing_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["item_id"], name: "index_supplier_item_pricings_on_item_id"
     t.index ["pricing_id"], name: "index_supplier_item_pricings_on_pricing_id"
     t.index ["supplier_id"], name: "index_supplier_item_pricings_on_supplier_id"
   end
@@ -131,16 +131,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_07_015104) do
   end
 
   add_foreign_key "customer_item_pricings", "customers"
-  add_foreign_key "customer_item_pricings", "items"
   add_foreign_key "customer_item_pricings", "pricings"
   add_foreign_key "customers", "users"
+  add_foreign_key "items", "customer_item_pricings"
+  add_foreign_key "items", "main_item_pricings"
+  add_foreign_key "items", "supplier_item_pricings"
   add_foreign_key "items", "unit_of_measures", column: "base_unit_id"
   add_foreign_key "items", "unit_of_measures", column: "target_unit_id"
-  add_foreign_key "main_item_pricings", "items"
   add_foreign_key "main_item_pricings", "pricings"
   add_foreign_key "notifications", "users"
   add_foreign_key "pricings", "currencies"
-  add_foreign_key "supplier_item_pricings", "items"
   add_foreign_key "supplier_item_pricings", "pricings"
   add_foreign_key "supplier_item_pricings", "suppliers"
 end

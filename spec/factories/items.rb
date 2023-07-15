@@ -11,5 +11,8 @@ FactoryBot.define do
     weight { Faker::Lorem.word }
     base_unit_id { create(:unit_of_measure).id }
     target_unit_id { create(:unit_of_measure).id }
+    supplier_item_pricing { association :supplier_item_pricing }
+    main_item_pricing { association :main_item_pricing }
+    customer_item_pricing { association :customer_item_pricing }
   end
 end
