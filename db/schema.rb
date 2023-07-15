@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_15_121342) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_15_113016) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -105,6 +105,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_15_121342) do
     t.index ["currency_id"], name: "index_pricings_on_currency_id"
   end
 
+  create_table "supplier_formulas", force: :cascade do |t|
+    t.boolean "active"
+    t.float "margin"
+    t.bigint "supplier_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["supplier_id"], name: "index_supplier_formulas_on_supplier_id"
+  end
+
   create_table "supplier_item_pricings", force: :cascade do |t|
     t.string "status"
     t.bigint "supplier_id", null: false
@@ -149,6 +158,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_15_121342) do
   add_foreign_key "main_item_pricings", "pricings"
   add_foreign_key "notifications", "users"
   add_foreign_key "pricings", "currencies"
+  add_foreign_key "supplier_formulas", "suppliers"
   add_foreign_key "supplier_item_pricings", "items"
   add_foreign_key "supplier_item_pricings", "pricings"
   add_foreign_key "supplier_item_pricings", "suppliers"
