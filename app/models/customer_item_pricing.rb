@@ -1,10 +1,10 @@
 class CustomerItemPricing < ApplicationRecord
-    belongs_to :item, class_name: 'Item'
+    belongs_to :item
     validates :item, presence: true
 
-    belongs_to :customer, class_name: 'Customer'
+    belongs_to :customer
     validates :customer, presence: true
 
-    belongs_to :pricing, class_name: 'Pricing'
+    belongs_to :pricing
     validates :pricing, presence: true
 end

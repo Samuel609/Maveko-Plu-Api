@@ -1,4 +1,5 @@
 class Pricing < ApplicationRecord
+  belongs_to :currency
   validates :price_in_euro, presence: true
   validates :old_purchase_price, presence: true
   validates :valid_from_old_purchase, presence: true
