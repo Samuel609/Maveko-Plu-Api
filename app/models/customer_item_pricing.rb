@@ -1,6 +1,6 @@
 class CustomerItemPricing < ApplicationRecord
-    belongs_to :item
-    validates :item, presence: true
+    # belongs_to :item
+    # validates :item, presence: true
 
     belongs_to :customer
     validates :customer, presence: true

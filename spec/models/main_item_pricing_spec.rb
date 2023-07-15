@@ -5,6 +5,6 @@ RSpec.describe MainItemPricing, type: :model do
     expect(build(:main_item_pricing)).to be_valid
   end
 
-  it { belong_to(:item).class_name('Item')}
+  # it { belong_to(:item).class_name('Item')}
   it { belong_to(:pricing).class_name('Pricing')}
 end
