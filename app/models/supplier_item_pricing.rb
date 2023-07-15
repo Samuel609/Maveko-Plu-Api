@@ -1,5 +1,5 @@
 class SupplierItemPricing < ApplicationRecord
-    validates :status, presence: true
+    validates :status, :reference_number, presence: true
 
     belongs_to :item, class_name: 'Item'
     validates :item, presence: true
