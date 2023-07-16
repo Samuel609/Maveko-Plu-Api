@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :supplier_item_pricings
   resources :supplier_formulas
   resources :customer_formulas
+  resources :currency_conversions
   post '/auth/login', to: 'authentication#login'
   get '/*a', to: 'application#not_found'
   # Defines the root path route ("/")
