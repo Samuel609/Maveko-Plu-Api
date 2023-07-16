@@ -5,7 +5,7 @@ RSpec.describe "CustomerFormulas", type: :request do
 
   let(:valid_attributes) do
     {
-      margin: 12.3,
+      formula: 12.3,
       active: true,
       customer_id: create(:customer).id
     }
@@ -13,7 +13,7 @@ RSpec.describe "CustomerFormulas", type: :request do
 
   let(:invalid_attributes) do
     {
-      margin: nil,
+      formula: nil,
       active: nil,
       customer_id: create(:customer).id
     }
@@ -21,7 +21,7 @@ RSpec.describe "CustomerFormulas", type: :request do
 
   let(:new_attributes) do
     {
-      margin: 11.2,
+      formula: 11.2,
     }
-  end   
+  end
 end
