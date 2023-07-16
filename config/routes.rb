@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   resources :supplier_item_pricings
   resources :supplier_formulas
   resources :customer_formulas
+  resources :supplier_item_requests
+  resources :supplier_documents
   resources :currency_conversions
   resources :cross_references
   post '/auth/login', to: 'authentication#login'

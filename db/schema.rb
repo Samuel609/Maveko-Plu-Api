@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema[7.0].define(version: 2023_07_16_211325) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -154,12 +155,26 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_16_211325) do
     t.index ["supplier_id"], name: "index_supplier_item_pricings_on_supplier_id"
   end
 
+  create_table "supplier_item_requests", force: :cascade do |t|
+    t.string "item_code"
+    t.string "item_description"
+    t.string "dimensions"
+    t.string "price_per_pc"
+    t.string "base_unit"
+    t.string "target_unit"
+    t.string "currency"
+    t.bigint "supplier_document_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["supplier_document_id"], name: "index_supplier_item_requests_on_supplier_document_id"
+  end
+
   create_table "suppliers", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
+  
   create_table "unit_of_measures", force: :cascade do |t|
     t.string "name"
     t.string "unit"
@@ -192,4 +207,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_16_211325) do
   add_foreign_key "supplier_item_pricings", "items"
   add_foreign_key "supplier_item_pricings", "pricings"
   add_foreign_key "supplier_item_pricings", "suppliers"
+  add_foreign_key "supplier_item_requests", "supplier_documents"
 end
