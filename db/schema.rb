@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_15_135729) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_16_072241) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,7 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_15_135729) do
 
   create_table "customer_formulas", force: :cascade do |t|
     t.boolean "active"
-    t.float "margin"
+    t.float "formula"
     t.bigint "customer_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -61,7 +61,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_15_135729) do
     t.string "item_name"
     t.text "item_description"
     t.string "image"
-    t.string "dimensions"
     t.string "article_group"
     t.string "tax_class"
     t.string "weight"
@@ -71,8 +70,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_15_135729) do
     t.bigint "target_unit_id"
     t.bigint "main_item_pricing_id", null: false
     t.bigint "customer_item_pricing_id", null: false
+    t.bigint "dimension_id"
     t.index ["base_unit_id"], name: "index_items_on_base_unit_id"
     t.index ["customer_item_pricing_id"], name: "index_items_on_customer_item_pricing_id"
+    t.index ["dimension_id"], name: "index_items_on_dimension_id"
     t.index ["main_item_pricing_id"], name: "index_items_on_main_item_pricing_id"
     t.index ["target_unit_id"], name: "index_items_on_target_unit_id"
   end
@@ -162,6 +163,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_15_135729) do
   add_foreign_key "customer_item_pricings", "pricings"
   add_foreign_key "customers", "users"
   add_foreign_key "items", "customer_item_pricings"
+  add_foreign_key "items", "dimensions"
   add_foreign_key "items", "main_item_pricings"
   add_foreign_key "items", "unit_of_measures", column: "base_unit_id"
   add_foreign_key "items", "unit_of_measures", column: "target_unit_id"

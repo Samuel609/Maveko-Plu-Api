@@ -9,7 +9,7 @@ RSpec.describe Item, type: :model do
   it { should validate_presence_of(:decor_code) }
   it { should validate_presence_of(:item_name) }
   it { should validate_presence_of(:item_description) }
-  it { should validate_presence_of(:dimensions) }
+  it { should validate_presence_of(:dimension_id) }
   it { should validate_presence_of(:article_group) }
   it { should validate_presence_of(:tax_class) }
   it { should validate_presence_of(:weight) }
@@ -18,4 +18,5 @@ RSpec.describe Item, type: :model do
 
   it { should belong_to(:base_unit).class_name('UnitOfMeasure') }
   it { should belong_to(:target_unit).class_name('UnitOfMeasure') }
+  it { should belong_to(:dimension).class_name('Dimension') }
 end
