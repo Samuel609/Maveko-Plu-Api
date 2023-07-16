@@ -1,3 +1,4 @@
 class CustomerItemPricingSerializer < ActiveModel::Serializer
-  attributes :id, :item, :customer, :pricing
+  attributes :id, :customer, :pricing
+  has_one :pricing
 end
