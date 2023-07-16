@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_16_072241) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_16_150005) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "aas", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "abs", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "currencies", force: :cascade do |t|
     t.string "name"
@@ -115,6 +125,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_16_072241) do
     t.index ["currency_id"], name: "index_pricings_on_currency_id"
   end
 
+  create_table "supplier_documents", force: :cascade do |t|
+    t.string "reference_no"
+    t.bigint "supplier_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["supplier_id"], name: "index_supplier_documents_on_supplier_id"
+  end
+
   create_table "supplier_formulas", force: :cascade do |t|
     t.boolean "active"
     t.float "margin"
@@ -150,12 +168,28 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_16_072241) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user", force: :cascade do |t|
+    t.string "email"
+    t.string "password_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "role", default: "user", null: false
+  end
+
+  create_table "users_auth", force: :cascade do |t|
+    t.string "name"
+    t.string "username"
+    t.string "email"
+    t.string "password"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "customer_formulas", "customers"
@@ -170,6 +204,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_16_072241) do
   add_foreign_key "main_item_pricings", "pricings"
   add_foreign_key "notifications", "users"
   add_foreign_key "pricings", "currencies"
+  add_foreign_key "supplier_documents", "suppliers"
   add_foreign_key "supplier_formulas", "suppliers"
   add_foreign_key "supplier_item_pricings", "items"
   add_foreign_key "supplier_item_pricings", "pricings"
