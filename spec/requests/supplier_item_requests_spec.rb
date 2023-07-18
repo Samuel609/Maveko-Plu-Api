@@ -13,7 +13,7 @@ RSpec.describe "SupplierItemRequests", type: :request do
       supplier_document_id: create(:supplier_document).id,
       valid_from: Faker::Date.forward(days: 22),
       valid_to: Faker::Date.forward(days: 25),
-      new_price: 100
+      currency: Faker::Lorem.word
     }
   end
 
@@ -28,7 +28,7 @@ RSpec.describe "SupplierItemRequests", type: :request do
       supplier_document_id:create(:supplier_document).id,
       valid_from: Faker::Date.forward(days: 22),
       valid_to: Faker::Date.forward(days: 25),
-      new_price: 100
+      currency: Faker::Lorem.word
     }
   end
 
