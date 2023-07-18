@@ -10,6 +10,7 @@ FactoryBot.define do
     currency { Faker::Lorem.word }
     valid_from { Faker::Date.between(from: '2020-01-01', to: '2020-12-31') }
     valid_to { Faker::Date.between(from: '2020-01-01', to: '2020-12-31') }
+    new_price { 100 }
     
   end
 end
