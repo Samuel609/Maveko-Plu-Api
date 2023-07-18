@@ -29,7 +29,7 @@ class NotifcationService
                         sender: "price List Management Team", status: Notification::UNREAD, user_id: user_id, delivery_date: Date.today)
   end
 
-  def Master_pricelist_updated(user_id)
+  def master_pricelist_updated(user_id)
     Notification.create(title: "master price list updated", body: "master price list has been updated",
                         sender: "price List Management Team", status: Notification::UNREAD, user_id: user_id, delivery_date: Date.today)
   end
@@ -47,7 +47,7 @@ class NotifcationService
     elsif @type == "selling_price_approved"
       selling_price_calculated(@user.id)
     elsif @type == "update_master_pricelist"
-      Master_pricelist_updated(@user.id)
+      master_pricelist_updated(@user.id)
     end
   end
 
