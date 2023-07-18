@@ -19,6 +19,22 @@ class NotifcationService
                         sender: "Price List Management Team", status: Notification::UNREAD, user_id: user_id, delivery_date: Date.today)
   end
 
+  def selling_price_calculated(user_id)
+    Notification.create(title: " selling price calculated", body: "selling price has been calculated ",
+                        sender: "price List Management Team", status: Notification::UNREAD, user_id: user_id, delivery_date: Date.today)
+  end
+
+  def selling_price_approved(user_id)
+    Notification.create(title: "selling price approved", body: "selling price has been approved",
+                        sender: "price List Management Team", status: Notification::UNREAD, user_id: user_id, delivery_date: Date.today)
+  end
+
+  def Master_pricelist_updated(user_id)
+    Notification.create(title: "selling price approved", body: "selling price has been approved",
+                        sender: "price List Management Team", status: Notification::UNREAD, user_id: user_id, delivery_date: Date.today)
+  end
+
+
   def call
     if @type == "update"
       send_update_notification(@user.id)
@@ -26,8 +42,11 @@ class NotifcationService
       send_approval_notification(@user.id)
     elsif @type == "reject"
       send_reject_notification(@user.id)
+    elsif @type == "selling_price_calculated"
+      selling_price_calculated(@user.id)
+    elsif @type == "selling_price_approved"
+      selling_price_calculated(@user.id)
     end
   end
-
 
 end
