@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "SupplierItemRequests", type: :request do
-  include_examples('request_shared_spec', 'supplier_item_requests', 11)
+  include_examples('request_shared_spec', 'supplier_item_requests', 14)
   let(:valid_attributes) do
     {
       item_code:  "MyString" ,
@@ -10,7 +10,11 @@ RSpec.describe "SupplierItemRequests", type: :request do
       price_per_pc:  "MyString" ,
       base_unit:  "MyString" ,
       target_unit:  "MyString" ,
-      supplier_document_id: create(:supplier_document).id
+      supplier_document_id: create(:supplier_document).id,
+      valid_from: Faker::Date.forward(days: 22),
+      valid_to: Faker::Date.forward(days: 25),
+      currency: Faker::Lorem.word,
+      new_price: 100
     }
   end
 
@@ -23,6 +27,10 @@ RSpec.describe "SupplierItemRequests", type: :request do
       base_unit: "MyString" ,
       target_unit: "MyString" ,
       supplier_document_id:create(:supplier_document).id,
+      valid_from: Faker::Date.forward(days: 22),
+      valid_to: Faker::Date.forward(days: 25),
+      currency: Faker::Lorem.word,
+      new_price: 100
     }
   end
 

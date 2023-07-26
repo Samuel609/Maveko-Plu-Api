@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_17_065058) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_18_191637) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -167,6 +167,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_17_065058) do
     t.bigint "supplier_document_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "valid_from"
+    t.date "valid_to"
+    t.integer "new_price"
     t.index ["supplier_document_id"], name: "index_supplier_item_requests_on_supplier_document_id"
   end
 

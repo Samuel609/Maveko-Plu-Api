@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Items", type: :request do
-  include_examples('request_shared_spec', 'items', 12)
+  include_examples('request_shared_spec', 'items', 14)
   let(:valid_attributes) do
     {
       item_code: Faker::Code.npi,
